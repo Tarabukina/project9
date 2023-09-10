@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from datetime import datetime
 from utils import five_str_load, function_five_load, load_str, date_last, load_json
 JSON_FILE = Path(__file__).resolve().parent / 'operations.json'
 file_json = load_json(JSON_FILE)
@@ -19,7 +20,8 @@ for list_bank, s, list_numb in zip(numb_bank, five_str_load, result_strings):
     description = s['description']
     name = s['operationAmount']['currency']['name']
     summ_operation = s['operationAmount']['amount']
-    date = s['date']
+
+    date = datetime.strptime(s["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
     to = s['to'][:-14].replace('Счет ', '')
     print(f'{date[:10].replace("-", ".")} {description}\n'
           f'{list_bank} {list_numb} -> Счет **{to[2:]}\n'

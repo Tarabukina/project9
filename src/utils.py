@@ -1,5 +1,7 @@
 import json
 from pathlib import Path
+
+from datetime import datetime
 JSON_FILE = Path(__file__).resolve().parent / 'operations.json'
 
 def load_json(file_path):
@@ -17,6 +19,7 @@ def date_last(UP):
     return sorted_data_1
 
 
+sorted_data = date_last(file_json)
 
 
 # создаем пустой список для записи первых 5 значений
@@ -41,12 +44,11 @@ def load_str(resorted):
     return five_str_load
 
 
-
+five_list = load_str(sorted_data)
 
 # создаем 2 списка для записи в них наименования банка и наименоваие счета
 numb_bank = [] # имя банка
 numb_kart = [] # имя счета
-
 
 def function_five_load(an):
     '''функция извлекает все статусы из списка и разделяет
@@ -58,12 +60,10 @@ def function_five_load(an):
 
         numb_bank.append(' '.join(w[:-1]))
         numb_kart.append(''.join(w[-1]))
-    #print(numb_bank)
-   # print(numb_kart)
     return numb_bank, numb_kart
 
 
-
+numb_bank, numb_kart = function_five_load(five_list)
 
 # создаем пустой список, чтобы добавить звездочки, вместе символов
 
@@ -80,7 +80,14 @@ def stars_numb(q):
     return replay_numb_kart
 
 
+numb_kart = stars_numb(numb_kart)
 
+result_strings = []
+
+for string in numb_kart:
+    for i in range(0, len(string), 4):
+        formatted_string = ' '.join([string[i:i + 4] for i in range(0, len(string), 4)])
+        result_strings.append(formatted_string)
 
 
 

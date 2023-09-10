@@ -1,11 +1,10 @@
-import pytest
 from pathlib import Path
-
+import pytest
 from src.utils import load_json, date_last, stars_numb, function_five_load, load_str
 
 TESTING_DATA = Path(__file__).resolve().parent / "operations.json"
 
-@pytest.fixture
+@pytest.fixture()
 def test_load_json():
 
     expected_data = [
